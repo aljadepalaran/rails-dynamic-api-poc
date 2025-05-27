@@ -1,6 +1,8 @@
 class Api::UsersController < ApplicationController
+  ALLOWED_FIELDS = %w[id first_name last_name email created_at]
+
   def index
-    @fields = params[:fields] || User.column_names
+    @fields = params[:fields]&.select { |f| ALLOWED_FIELDS.include?(f) } || ALLOWED_FIELDS
     @users = User.select(@fields).page(page).per(per_page)
   end
 
