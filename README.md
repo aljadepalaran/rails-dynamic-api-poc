@@ -44,3 +44,9 @@ bundle install
 # Set up the database
 bin/rails db:setup
 ```
+
+Example Request: `http://localhost:3000/api/users.json?fields[]=id&fields[]=first_name&fields[]=last_name&fields[]=email&fields[]=password_digest&per_page=5&page=1`
+
+This will fetch the id, first name, last name and email of all users. It will only return 5 at a time, controlled by pagination. 
+
+*Note: While there is a request of the password_digest field, because it's not an allowed field, it is not fetched or returned.*
